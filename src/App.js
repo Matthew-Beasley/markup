@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import marked from 'marked';
 
 function App() {
+
+  const [text, setText] = useState('');
+
+  function MyComponent(val) {
+    return <div dangerouslySetInnerHTML={{ _html: marked(text) }} />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Markdown History Editor</h1>
+      <div className="container">
+        <input type="text" value={text} onChange={(ev) => setText(ev)}></input>
+        <div>
+          <ul>
+          {MyComponent()}
+          </ul>
+        </div>
+      </div>
+      <button onClick={MyComponent()}>Save</button>
+
     </div>
   );
 }
