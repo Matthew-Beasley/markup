@@ -5,23 +5,18 @@ function App() {
 
   const [text, setText] = useState('');
 
-  function MyComponent(val) {
-    return <div dangerouslySetInnerHTML={{ _html: marked(text) }} />;
-  }
 
   return (
     <div>
       <h1>Markdown History Editor</h1>
       <div className="container">
-        <input type="text" value={text} onChange={(ev) => setText(ev)}></input>
+        <input type="text" value={text} onChange={(ev) => { setText(ev.target.value)}}></input>
         <div>
-          <ul>
-          {MyComponent()}
-          </ul>
+          {console.log(marked(text))}
+          <div dangerouslySetInnerHTML={{ __html: marked(text) }} />
         </div>
       </div>
-      <button onClick={MyComponent()}>Save</button>
-
+      <button >Save</button>
     </div>
   );
 }
