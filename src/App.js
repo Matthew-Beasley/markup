@@ -4,6 +4,7 @@ import marked from 'marked';
 function App() {
 
   const [text, setText] = useState('');
+  const [versions, setVersion] = useState([]);
 
 
   return (
@@ -12,11 +13,11 @@ function App() {
       <div className="container">
         <input type="text" value={text} onChange={(ev) => { setText(ev.target.value)}}></input>
         <div>
-          {console.log(marked(text))}
           <div dangerouslySetInnerHTML={{ __html: marked(text) }} />
         </div>
       </div>
-      <button >Save</button>
+        <button onClick={() => setVersion([...versions, text])}>Save</button>
+      {versions.map((version, idx) => { return <button key={idx} onClick={() => setText(version)}>Version {idx}</button>} )}
     </div>
   );
 }
